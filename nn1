@@ -2,3 +2,26 @@ Logistic regreession is a way of binary classification
 What we have is a Nx dimensional X vctor , and we have to predict a Nx dimensional W vector such that W(transpose)X is as close as possible ot Y, Y which is the nswer of each class , maybe we can use the sigmoid dunction 
 Now if u use the squared difference as an error fucntion, it is not good, since it makes the problem convex . SO we use another loss function -> ylogY + (1-y)logY
 W = W - (alpha)differential of cost wrt W
+
+							Week 2->  cat vs dog classifier
+Common steps for pre-processing a new dataset are:
+Figure out the dimensions and shapes of the problem (m_train, m_test, num_px, ...)
+Reshape the datasets such that each example is now a vector of size (num_px * num_px * 3, 1)
+"Standardize" the data
+
+Initialize (w,b)
+Optimize the loss iteratively to learn parameters (w,b):
+computing the cost and its gradient
+updating the parameters using gradient descent
+Use the learned (w,b) to predict the labels for a given set of examples
+
+
+					Week 3 -> single hidden layer network 
+THe main important thing is the 6 main equation for the bachword propogation. Just ensure that your matrix multipliation dimensions are correct 
+
+
+Week 4
+What does a deep network actuallu do 
+So basically , the earlier layers compute the easy functions like the graident of patters(simple), the later layers can then combine to form more complex functions llke the ear nose or mouth detection or more compelx like the face detection. 
+Example ->the starting layers can detect the phonemes, -> deeper can detect words, deepest can detect senteces
+
