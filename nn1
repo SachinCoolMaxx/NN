@@ -1,0 +1,4 @@
+Logistic regreession is a way of binary classification 
+What we have is a Nx dimensional X vctor , and we have to predict a Nx dimensional W vector such that W(transpose)X is as close as possible ot Y, Y which is the nswer of each class , maybe we can use the sigmoid dunction 
+Now if u use the squared difference as an error fucntion, it is not good, since it makes the problem convex . SO we use another loss function -> ylogY + (1-y)logY
+W = W - (alpha)differential of cost wrt W
