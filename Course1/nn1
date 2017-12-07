@@ -25,3 +25,9 @@ What does a deep network actuallu do
 So basically , the earlier layers compute the easy functions like the graident of patters(simple), the later layers can then combine to form more complex functions llke the ear nose or mouth detection or more compelx like the face detection. 
 Example ->the starting layers can detect the phonemes, -> deeper can detect words, deepest can detect senteces
 
+cahes[L-1] has the cache A,W,b wher A a rethe inputs over which we applied the sigmois
+apart from the cache(L-1) we also have another AL whihc is the actual output of the last sigmoid layer
+
+**remenber the counting of cache starts from 0 
+* What we did was basically that we had a input vector X of m images, each column reproesting a flattened image. Now we made a deep neural network to solve this issue. The deep network is made b first taking a parameter which tells us the hyperparameter which is the size of each layer. Then we initialize our weight matrices with random values, after this we forward propogate out network, by using the WX+b equations and also apply the non-linearity of our choice after each layer. At the end we compute the loss fucntion.
+Now its the time for back-propagation. We calculate the derivatives of cost function wrt to each of the parameters systematically via back propagating. You get the gradients of cost function wrt to each of the parameters and now u update them based on learning rate. 
