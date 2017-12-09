@@ -1,0 +1,91 @@
+Regularization
+1) regularization term
+dropout
+data augmentation
+early stopping
+
+VanishingExloding Gradients -> due to the linearity , in very deep netwoeks, the weights may either blow up if initail value was greater than 1 and may vanish if the inital value was less then 1 , so we initialze the weights with variace equal to 1/n . there are many papers on the same whihc u can refer.
+
+You should generally try to normalize ur inputs , it is  a good practice, but ensure to noramlize the test cases with the mean and variance same as those of the training examples not those of the test cases. 
+
+
+CONCEPT OF GRADIENT CHECKING
+
+To implement DropOut
+#step 1initialize matrix D1 = np.random.rand(..., ...)
+# Step 2: convert entries of D1 to 0 or 1 (using keep_prob as the threshold)
+# Step 3: shut down some neurons of A1
+# Step 4: scale the value of neurons that haven't been shut down
+
+
+				WEEK 2
+Mean Batch Gradient descent
+Divide th 5million training set into mini batches of 100 examples each
+{t} denotes the tth minim batch 
+See the screenshot for the minibatch gradient descent
+We use mini batch gradient descent because if our datset is large then processing the whole dataset on each gradient descent is kind of waste. So what u do insteads is to process smaller batch of examples in each iteration so as to save the processing times 
+
+When applying gradeint descent it is genrally a good practice to shuffle the data 
+    # Step 1: Shuffle (X, Y)
+    permutation = list(np.random.permutation(m))
+    shuffled_X = X[:, permutation]
+    shuffled_Y = Y[:, permutation].reshape((1,m))
+Shuffling and Partitioning are the two steps required to build mini-batches
+Powers of two are often chosen to be the mini-batch size, e.g., 16, 32, 64, 128.
+
+In momentum based update
+Common values for  β  range from 0.8 to 0.999. If you don't feel inclined to tune this,  β=0.9β=0.9  is often a reasonable default.
+
+			OTHER OPTIMIZATION ALGO
+Exponentially weighted average model -> Vt = beta*Vt-1 + (1-betaa)*present value
+1) Method -> MOMENTUM GRADIENT DESCENT 
+When u direcelty use the dW value to update the W, there are always chances of overshooting and being jig jag, so bttr we apply exponential moving average on the gradient descent value computed to compute the updted value of parameters
+2)adams algorithm, some other also 
+3) also one can try decreasing the learning rate as the iterations are proceeded, alpha = aplha/(1+decayrate*epochNumb)
+4) ADAMS APPRAOCH - can give highly improved results, is a combination of momentum and the squared appraoch, higly suggested to use adams appraoch for the parameter updation in Neural networks 
+
+
+
+
+
+
+
+
+***Sumarizing what all learnt till now 
+1) we need to prevent the overfitting of the data,so we need to add the regularization term to the cost function, the concept of which is that higher value of weights are penalized and hence the model cant overfit
+2) we can also use dropout. DropOut basically prevents the output of the next layer to depend too much on a single neuron since we train the model by dropping put random neurons 
+3) Early stopping and data augmentation are also some of the other methods for preveting overfiitng 
+**it has been concluded from the assignments and papers that using dropout and regulariztion may decrease ur training set accuracy but it generally increases ur test accuracy 
+4) proper parameter initialization is necessary, dont intialize with all 0. Also try to keep the variance of the initailized paramteres as sqrt(2/n) [refer He 2015] paper on the same. Proper parameter initialization ensures faster gradient.
+5) Now when training use mini batch gradient descent
+6) when applying gradient descent try to use momentum based gradeint descent or any other modern appraoch, ADAMS APPROACH IS THE BEST TO USE
+7) U can also try varying the lerning rate 
+
+
+model								train accuracy	test accuracy
+3-layer NN without regularization	95%				91.5%
+3-layer NN with L2-regularization	94%				93%
+3-layer NN with dropout				93%				95%
+
+
+model												Train accuracy			Problem/Comment
+3-layer NN with zeros initialization				50%						fails to break symmetry
+3-layer NN with large random initialization			83%						too large weights
+3-layer NN with He initialization					99%						recommended method
+
+optimization method			accuracy			cost shape
+Gradient descent			79.7%				oscillations
+momentum					79.7%				oscillations
+Adam						94%					smoother
+
+
+			
+
+								WEEK 3
+
+Batch Normalizatin In the gradient descent is like normalization of the parameters in the hidden layers for better training . Generally u noramlize the Z values and then apply the non linear function 
+Why does batch noramlization works is that - suppose u train over all black cats, then u will want that ur model preedicts colorful cats also, so batch norma helps in this. This shift in distribution of the data is called covariate shift.Batch norm causes the values of the inputs to the next layer become more stable by normalizing it. The layer gets more independent, becuse the change in inputs to a layer due to change in the previous layers has now been scaled down. batch 
+Now during the test time u wont have a batch computation, u will generally have a single input and thus while testing u use the exponentially moving average from the previous compuatuion to eerplce teh thing 
+
+Multiclass calssification 
+we use softmax classifiers for this pupose -> suppose u have 4 classes, the last layer will now have 4 units, now the activation function for the last layer will be take the element wise exponential of the las layer. This will serve as ur probabaility 
